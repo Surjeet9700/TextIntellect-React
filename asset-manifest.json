@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TextIntellect-React/static/css/main.13770577.css",
+    "main.js": "/TextIntellect-React/static/js/main.ccdc9868.js",
+    "static/js/787.28cb0dcd.chunk.js": "/TextIntellect-React/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/TextIntellect-React/index.html",
+    "main.13770577.css.map": "/TextIntellect-React/static/css/main.13770577.css.map",
+    "main.ccdc9868.js.map": "/TextIntellect-React/static/js/main.ccdc9868.js.map",
+    "787.28cb0dcd.chunk.js.map": "/TextIntellect-React/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.13770577.css",
+    "static/js/main.ccdc9868.js"
+  ]
+}
