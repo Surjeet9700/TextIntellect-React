@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
-  
   const [text, setText] = useState("");
 
   const handleUPClick = () => {
@@ -9,21 +8,18 @@ export default function TextForm(props) {
     setText(newText);
     props.showAlert("converted to UpperCase", "success");
   };
-  
+
   const handleDownClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
     props.showAlert("converted to lowerCase", "success");
   };
-  
 
   const handleClearClick = () => {
-    let newText = ' ';
+    let newText = " ";
     setText(newText);
     props.showAlert("text cleared", "danger");
-
   };
-
 
   // function toCamelCase(text) {
   //   return text.replace(/[-_](.)/g, (_, char) => char.toUpperCase());
@@ -31,36 +27,42 @@ export default function TextForm(props) {
 
   function textToSpeech() {
     const Speech = new SpeechSynthesisUtterance();
-    Speech.lang = 'en';
+    Speech.lang = "en";
     Speech.text = text;
     window.speechSynthesis.speak(Speech);
     props.showAlert("speaking", "success");
-
   }
 
-  
-  
   const handleMiddleClick = () => {
     const words = text.split(" ");
-    const newText = words.map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
+    const newText = words
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join(" ");
     setText(newText);
     props.showAlert("converted to CamelCase", "success");
-
   };
-  
-  // this is array of stored colors
-  
-  const changeColor = (number) =>{
-    document.getElementById('myBox').style.color = color[number];
-    props.showAlert("Changing the color", "success");
 
-  }
-  const color = ['red', 'blue', 'grey', 'orange', 'green', 'black', 'pink', 'violet', 'teal'];
-  
+  // this is array of stored colors
+
+  const changeColor = (number) => {
+    document.getElementById("myBox").style.color = color[number];
+    props.showAlert("Changing the color", "success");
+  };
+  const color = [
+    "red",
+    "blue",
+    "grey",
+    "orange",
+    "green",
+    "black",
+    "pink",
+    "violet",
+    "teal",
+  ];
+
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
-
 
   const handleCopy = () => {
     const text = document.querySelector("#myBox");
@@ -71,52 +73,106 @@ export default function TextForm(props) {
       document.getSelection().removeAllRanges();
       props.showAlert("Copying to clipboard", "success");
       // console.log("i m at copy function");
-
     }
   };
-  
-  
+
   return (
     <>
-      <div className="container" style={{ color: props.mode === 'dark'?'white':'black'}}>
+      <div
+        className="container"
+        style={{ color: props.mode === "dark" ? "white" : "black" }}
+      >
         <div className="mb-3">
           <h1>{props.heading}</h1>
           <textarea
             className="form-control"
             value={text}
             onChange={handleOnChange}
-            style={{ backgroundColor: props.mode === 'dark' ? 'grey' : 'white', color: props.mode === 'dark'?'white':'black' }}
+            style={{
+              backgroundColor: props.mode === "dark" ? "grey" : "white",
+              color: props.mode === "dark" ? "white" : "black",
+            }}
             id="myBox"
             rows="8"
           ></textarea>
         </div>
-        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUPClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleUPClick}
+        >
           Convert to UpperCase
         </button>
-        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleDownClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleDownClick}
+        >
           Convert to LowerCase
         </button>
-        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleMiddleClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleMiddleClick}
+        >
           Convert to CamelCase
         </button>
-        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={textToSpeech}>
-        speak
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={textToSpeech}
+        >
+          speak
         </button>
-        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="button" onClick={() => changeColor(Math.floor(Math.random() * 5))}>Change Color</button>
-          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="button" onClick={handleCopy}>Copy Text</button>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          type="button"
+          onClick={() => changeColor(Math.floor(Math.random() * 5))}
+        >
+          Change Color
+        </button>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          type="button"
+          onClick={handleCopy}
+        >
+          Copy Text
+        </button>
 
-        <button disabled={text.length===0} className="btn btn-danger mx-1 my-1" onClick={handleClearClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-danger mx-1 my-1"
+          onClick={handleClearClick}
+        >
           Clear Text
         </button>
       </div>
-      <div className="container mx-1 my-1" style={{ color: props.mode === 'dark' ? 'white' : 'black', backgroundColor: props.mode === 'dark' ? 'grey' : 'white' }}>
-      <h2>Your Text Summary</h2>
+      <div
+        className="container mx-1 my-1"
+        style={{
+          color: props.mode === "dark" ? "white" : "black",
+          backgroundColor: props.mode === "dark" ? "grey" : "white",
+        }}
+      >
+        <h2>Your Text Summary</h2>
         <p>
-        {text.length === 0 ? "0 " : text.trim().split(" ").length} words and {text.length} characters
+          {text.length === 0 ? "0 " : text.trim().split(/\s+/).length} words and{" "}
+          {text.length} characters
         </p>
-        <p>{0.008 * text.trim().split(" "). filter((element)=>{return element.length!==0}).length} Minutes to read</p>
+        <p>
+          {0.008 *
+            text
+              .trim()
+              .split(" ")
+              .filter((element) => {
+                return element.length !== 0;
+              }).length}{" "}
+          Minutes to read
+        </p>
         <h2>Preview</h2>
-        <p>{text.length>0 ? text:"Nothing To Preview " }</p>
+        <p>{text.length > 0 ? text : "Nothing To Preview "}</p>
       </div>
     </>
   );
