@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
+  
   const [text, setText] = useState("");
 
   const handleUPClick = () => {
@@ -67,6 +68,7 @@ export default function TextForm(props) {
       text.select();
       text.setSelectionRange(0, 9999);
       navigator.clipboard.writeText(text.value);
+      document.getSelection().removeAllRanges();
       props.showAlert("Copying to clipboard", "success");
       // console.log("i m at copy function");
 
@@ -88,33 +90,33 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-        <button className="btn btn-primary" onClick={handleUPClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUPClick}>
           Convert to UpperCase
         </button>
-        <button className="btn btn-primary mx-3" onClick={handleDownClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleDownClick}>
           Convert to LowerCase
         </button>
-        <button className="btn btn-primary my-2" onClick={handleMiddleClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleMiddleClick}>
           Convert to CamelCase
         </button>
-        <button className="btn btn-primary mx-1" onClick={textToSpeech}>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={textToSpeech}>
         speak
         </button>
-        <button className="btn btn-primary mx-1" type="button" onClick={() => changeColor(Math.floor(Math.random() * 5))}>Change Color</button>
-          <button className="btn btn-primary mx-1" type="button" onClick={handleCopy}>Copy Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="button" onClick={() => changeColor(Math.floor(Math.random() * 5))}>Change Color</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="button" onClick={handleCopy}>Copy Text</button>
 
-        <button className="btn btn-danger mx-1" onClick={handleClearClick}>
+        <button disabled={text.length===0} className="btn btn-danger mx-1 my-1" onClick={handleClearClick}>
           Clear Text
         </button>
       </div>
-      <div className="container my-3" style={{ color: props.mode === 'dark' ? 'white' : 'black', backgroundColor: props.mode === 'dark' ? 'grey' : 'white' }}>
+      <div className="container mx-1 my-1" style={{ color: props.mode === 'dark' ? 'white' : 'black', backgroundColor: props.mode === 'dark' ? 'grey' : 'white' }}>
       <h2>Your Text Summary</h2>
         <p>
         {text.length === 0 ? "0 " : text.trim().split(" ").length} words and {text.length} characters
         </p>
-        <p>{0.008 * text.trim().split(" ").length} Minutes to read</p>
+        <p>{0.008 * text.trim().split(" "). filter((element)=>{return element.length!==0}).length} Minutes to read</p>
         <h2>Preview</h2>
-        <p>{text.length>0 ? text:"Enter something in the textbox to preview it here " }</p>
+        <p>{text.length>0 ? text:"Nothing To Preview " }</p>
       </div>
     </>
   );

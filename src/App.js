@@ -42,7 +42,7 @@ function App() {
           <About />
         </Route> */}
         
-            <TextForm showAlert={showAlert} heading="Enter the text to Analyze below" mode={mode} />  
+            <TextForm showAlert={showAlert} heading="Enter The Text To Analyze Below" mode={mode} />  
         
       
 
